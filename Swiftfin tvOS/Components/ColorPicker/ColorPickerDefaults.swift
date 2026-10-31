@@ -22,7 +22,7 @@ enum ColorPickerDefaults: CaseIterable, Displayable {
         case .jellyfin:
             .jellyfinPurple
         case .red:
-            .red
+            .themeRed
         case .orange:
             .orange
         case .yellow:

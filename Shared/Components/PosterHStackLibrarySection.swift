@@ -52,7 +52,7 @@ struct PosterHStackLibrarySection<Library: PagingLibrary>: View
     private var headerTitle: some View {
         Text(group.displayTitle)
             .font(.title3)
-            .fontWeight(.semibold)
+            .fontWeight(.bold)
             .lineLimit(1)
     }
 

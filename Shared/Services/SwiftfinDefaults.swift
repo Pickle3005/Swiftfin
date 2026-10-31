@@ -66,17 +66,17 @@ extension Defaults.Keys {
     ///
     /// This is set externally whenever the app or user accent colors change,
     /// depending on the current app state.
-    static var accentColor: Key<Color> = AppKey("accentColor", default: .jellyfinPurple)
+    static var accentColor: Key<Color> = AppKey("accentColor", default: .themeRed)
 
     /// The _real_ appearance key to be used.
     ///
     /// This is set externally whenever the app or user appearances change,
     /// depending on the current app state.
-    static let appearance: Key<AppAppearance> = AppKey("appearance", default: .system)
+    static let appearance: Key<AppAppearance> = AppKey("appearance", default: .dark)
 
     /// The appearance default for non-user contexts.
     /// /// Only use for `set`, use `appearance` for `get`.
-    static let appAppearance: Key<AppAppearance> = AppKey("appAppearance", default: .system)
+    static let appAppearance: Key<AppAppearance> = AppKey("appAppearance", default: .dark)
 
     static let backgroundSignOutInterval: Key<TimeInterval> = AppKey("backgroundSignOutInterval", default: 3600)
     static let backgroundTimeStamp: Key<Date> = AppKey("backgroundTimeStamp", default: Date.now)
@@ -100,13 +100,13 @@ extension Defaults.Keys {
     /// The accent color default for user contexts.
     /// Only use for `set`, use `accentColor` for `get`.
     static var userAccentColor: Key<Color> {
-        UserKey("userAccentColor", default: .jellyfinPurple)
+        UserKey("userAccentColor", default: .themeRed)
     }
 
     /// The appearance default for user contexts.
     /// /// Only use for `set`, use `appearance` for `get`.
     static var userAppearance: Key<AppAppearance> {
-        UserKey("userAppearance", default: .system)
+        UserKey("userAppearance", default: .dark)
     }
 
     enum Customization {
