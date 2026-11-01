@@ -3,9 +3,9 @@ name: "Fork Build Check (tvOS)"
 # Compile-checks the tvOS app on GitHub-hosted macOS runners.
 # The upstream ci.yml uses a self-hosted runner label that forks don't have.
 
+# Manual only: GitHub-hosted runners currently top out at Xcode 26.x,
+# but Swiftfin needs Xcode 27, so automatic runs always fail.
 on:
-  push:
-    branches: [ "claude/**" ]
   workflow_dispatch:
 
 concurrency:
