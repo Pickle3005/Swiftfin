@@ -25,6 +25,9 @@ struct RootView: View {
                 UserSessionRootView()
             }
         }
+        #if os(tvOS)
+        .background(Color.themeBackground.ignoresSafeArea())
+        #endif
         .animation(.linear(duration: 0.1), value: rootCoordinator.state)
         .task {
             rootCoordinator.start()

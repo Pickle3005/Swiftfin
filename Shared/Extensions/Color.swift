@@ -12,6 +12,12 @@ extension Color {
 
     static let jellyfinPurple = Color(red: 172 / 255, green: 92 / 255, blue: 195 / 255, opacity: 1)
 
+    /// Netflix-style theme red, used as the default accent color.
+    static let themeRed = Color(red: 229 / 255, green: 9 / 255, blue: 20 / 255, opacity: 1)
+
+    /// Netflix-style theme background.
+    static let themeBackground = Color(red: 20 / 255, green: 20 / 255, blue: 20 / 255, opacity: 1)
+
     var uiColor: UIColor {
         UIColor(self)
     }

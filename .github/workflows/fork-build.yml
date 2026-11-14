@@ -1,0 +1,55 @@
+name: "Fork Build Check (tvOS)"
+
+# Compile-checks the tvOS app on GitHub-hosted macOS runners.
+# The upstream ci.yml uses a self-hosted runner label that forks don't have.
+
+# Manual only: GitHub-hosted runners currently top out at Xcode 26.x,
+# but Swiftfin needs Xcode 27, so automatic runs always fail.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: "Build Swiftfin tvOS"
+    runs-on: macos-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select newest Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE=$(ls -d /Applications/Xcode*.app | grep -v -i beta | sort -V | tail -1)
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+
+      - name: Install build tools
+        run: brew bundle --file Brewfile
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project Swiftfin.xcodeproj \
+            -scheme "Swiftfin tvOS" \
+            -sdk appletvsimulator \
+            -destination "generic/platform=tvOS Simulator" \
+            -skipMacroValidation \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee build.log | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" build.log
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log

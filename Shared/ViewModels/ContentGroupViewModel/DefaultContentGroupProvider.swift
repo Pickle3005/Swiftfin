@@ -62,7 +62,8 @@ struct DefaultContentGroupProvider: ContentGroupProvider {
         #endif
 
         PosterGroup(
-            library: NextUpLibrary()
+            library: NextUpLibrary(),
+            posterDisplayType: .landscape
         )
 
         if Defaults[.Customization.Home.showRecentlyAdded] {
